@@ -1,0 +1,13 @@
+<!-- views/partials/_navbar.ejs -->
+
+<nav>
+  <% if(user) { %>
+    <a href="/">View my Recipes</a>
+    <a href="/recipes/new">add new Recipes</a>
+    <a href="/ingredients/new">add new Ingredients</a>
+    <a href="/auth/sign-out">Sign Out</a>
+    <% } else { %>
+      <a href="/auth/sign-in">Sign In</a>
+      <a href="/auth/sign-up">Sign Up</a>
+      <% } %>
+</nav>
