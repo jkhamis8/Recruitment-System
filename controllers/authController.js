@@ -3,11 +3,7 @@ const router = express.Router();
 const user = require('../models/userModel')
 const bcrypt = require('bcrypt')
 
-
-
-
-
-const signUp = async () => {
+const signUp = async (req,res) => {
   const userInDatabase = await user.findOne({ username: req.body.username })
   if (userInDatabase) {
     return res.send('username is already taken')
@@ -23,7 +19,7 @@ const signUp = async () => {
   //res.render("auth/sign-in.ejs");
 };
 
-const signIn = async () => {
+const signIn = async (req,res) => {
   const userInDatabase = await user.findOne({ username: req.body.username })
   if (!userInDatabase) {
     return res.send('username is not correct')
@@ -31,6 +27,7 @@ const signIn = async () => {
   if (bcrypt.compareSync(req.body.password, userInDatabase.password)) {
     req.session.user = {
       username: userInDatabase.username,
+      role:userInDatabase.role,
       _id: userInDatabase._id
     }
     res.redirect('/')
@@ -39,8 +36,6 @@ const signIn = async () => {
   }
 
 };
-
-
 
 module.exports = {
   signUp,

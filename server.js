@@ -36,7 +36,6 @@ app.use(passUserToView);
 app.use('/', routes);
 app.use(isSignedIn)
 
-
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });

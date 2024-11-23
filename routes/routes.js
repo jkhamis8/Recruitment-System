@@ -1,7 +1,7 @@
 const express = require('express')
 const route = express.Router()
 
-const authController = require('./controllers/authController.js')
+const authController = require('../controllers/authController')
 const adminController = require('../controllers/adminController')
 const candidateController = require('../controllers/candidateController')
 const clientController = require('../controllers/clientController')
@@ -9,7 +9,7 @@ const vacancyController = require('../controllers/vacancyController')
 
 route.get('/', (req, res) => {
 
-  res.render('./layout.ejs', { page: './auth/sign-in.ejs' })
+  res.render('./layout.ejs', { page: './index.ejs' })
 })
 
 ////////////////////Auth
@@ -21,7 +21,6 @@ route.get("/sign-in", async (req, res) => {
 });
 route.post("/sign-up", authController.signUp);
 route.post("/sign-in", authController.signIn);
-
 route.get("/sign-out", async (req, res) => {
   req.session.destroy();
   res.redirect("/");

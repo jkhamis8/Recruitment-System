@@ -11,15 +11,11 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   role: {
+    type: String,
     enum: ["Admin", "Client", "Candidate"],
+    default: 'Candidate'
   },
   name: {
-    type: String,
-  },
-  age: {
-    type: String,
-  },
-  nationality: {
     type: String,
   },
   major: {
