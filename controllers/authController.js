@@ -3,7 +3,7 @@ const router = express.Router();
 const user = require('../models/userModel')
 const bcrypt = require('bcrypt')
 
-const signUp = async (req,res) => {
+const signUp = async (req, res) => {
   const userInDatabase = await user.findOne({ username: req.body.username })
   if (userInDatabase) {
     return res.send('username is already taken')
@@ -19,7 +19,7 @@ const signUp = async (req,res) => {
   //res.render("auth/sign-in.ejs");
 };
 
-const signIn = async (req,res) => {
+const signIn = async (req, res) => {
   const userInDatabase = await user.findOne({ username: req.body.username })
   if (!userInDatabase) {
     return res.send('username is not correct')
@@ -27,7 +27,7 @@ const signIn = async (req,res) => {
   if (bcrypt.compareSync(req.body.password, userInDatabase.password)) {
     req.session.user = {
       username: userInDatabase.username,
-      role:userInDatabase.role,
+      role: userInDatabase.role,
       _id: userInDatabase._id
     }
     res.redirect('/')

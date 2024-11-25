@@ -7,10 +7,7 @@ const candidateController = require('../controllers/candidateController')
 const clientController = require('../controllers/clientController')
 const vacancyController = require('../controllers/vacancyController')
 
-route.get('/', (req, res) => {
-
-  res.render('./layout.ejs', { page: './index.ejs' })
-})
+route.get('/', vacancyController.index)
 
 ////////////////////Auth
 route.get("/sign-up", async (req, res) => {
@@ -28,10 +25,26 @@ route.get("/sign-out", async (req, res) => {
 /////////////////End Auth
 
 //
+route.get('/createClientUser', async (req, res) => {
+  res.render('./layout.ejs', { page: './admin/createClientUser.ejs' })
+});
+route.post('/createClientUser', adminController.createClientUser)
+
+
 route.get('/admin', adminController.index)
 route.get('/candidate', candidateController.index)
 route.get('/client', clientController.index)
-route.get('/vacancy', vacancyController.index)
+
+route.get('/addVacancy', async (req, res) => {
+  res.render('./layout.ejs', { page: './client/createVacancy.ejs' })
+});
+route.post('/addVacancy', clientController.createVacancy)
+
+route.get('/ManageVacancy', async (req, res) => {
+  res.render('./layout.ejs', { page: './client/ManageVacancy.ejs' })
+});
+
+route.post('/addVacancy', clientController.createVacancy)
 
 
 // route.post('/admin', carController.create)

@@ -1,7 +1,8 @@
 <!-- views/partials/_navbar.ejs -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand ps-3" href="/" style="font-family: auto;"><span style="color:green">Jobs</span>Path</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -11,25 +12,37 @@
           <a class="nav-link" href="/">Home</a>
         </li>
         <% if(user) { %>
-          <% if(user.role=="Admin") { %>
-            <a class="nav-item nav-link" href="#">Client Management</a>
-            <a class="nav-item nav-link" href="#">Vacancies Management</a>
+          <% if(user.role=="Admin" ) { %>
+            <a class="nav-item nav-link" href="/addClient">Client Management</a>
+            <a class="nav-item nav-link" href="">Vacancies Management</a>
             <a class="nav-item nav-link" href="#">Candidate Management</a>
-          <% } else if(user.role=="Client") { %>
-            <a class="nav-item nav-link" href="#">Vacancies Management</a>
-          <% } else if(user.role=="Candidate") { %>
-            <a class="nav-item nav-link" href="#">Vacancies Management</a>
-            <a class="nav-item nav-link" href="#">Profile</a>
-            <% } %>
-        <% } %>
+            <% } else if(user.role=="Client" ) { %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Vacancies Management
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/addVacancy">add Vacancy</a></li>
+                  <li><a class="dropdown-item" href="/ManageVacancy">Manage Vacancies</a></li>
+                </ul>
+              </li>
+              <% } else if(user.role=="Candidate" ) { %>
+                <a class="nav-item nav-link" href="/addVacancy">Vacancies Management</a>
+                <a class="nav-item nav-link" href="#">Profile</a>
+                <% } %>
+                  <% } %>
       </ul>
       <ul class="nav d-flex justify-content-end">
         <% if(user) { %>
-          <li class="nav-item"><a class="nav-link" href="/sign-out"><span class="glyphicon glyphicon-log-in"></span>LogOut</a></li>
-        <% } else { %>
-          <li class="nav-item"><a class="nav-link" href="/sign-up"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
-          <li class="nav-item"><a class="nav-link" href="/sign-in"><span class="glyphicon glyphicon-log-in"></span>LogIn</a></li>
-        <% } %>
+          <li class="nav-item"><a class="nav-link" href="/sign-out"><span
+                class="glyphicon glyphicon-log-in"></span>LogOut</a></li>
+          <% } else { %>
+            <li class="nav-item"><a class="nav-link" href="/sign-up"><span class="glyphicon glyphicon-user"></span>
+                SignUp</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sign-in"><span
+                  class="glyphicon glyphicon-log-in"></span>LogIn</a></li>
+            <% } %>
       </ul>
     </div>
   </div>

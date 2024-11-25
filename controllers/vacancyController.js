@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../models/userModel.js');
+const Vacancies = require('../models/vacanciesModel.js');
 
-const index = (req, res) => {
-  res.render('index.ejs')
+const index = async (req, res) => {
+  const allVacancies = await Vacancies.find({})
+  res.render('./layout.ejs', { page: './index.ejs', vacancies: allVacancies })
 }
 
 const createVacancy = () => {

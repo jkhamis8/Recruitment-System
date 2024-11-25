@@ -6,12 +6,12 @@
           <div class="row">
             <div class="col-12">
               <div class="mb-5">
-                <h2 class="h3">Registration</h2>
-                <h3 class="fs-6 fw-normal text-secondary m-0">Enter your details to register</h3>
+                <h2 class="h3">Add Client</h2>
+                <h3 class="fs-6 fw-normal text-secondary m-0">Enter The Client Details</h3>
               </div>
             </div>
           </div>
-          <form action="/sign-up" method="POST">
+          <form action="/addClient" method="post">
             <div class="row gy-3 gy-md-4 overflow-hidden">
               <div class="col-12">
                 <label for="firstName" class="form-label">Username<span class="text-danger">*</span></label>
@@ -32,34 +32,12 @@
                 <input type="password" class="form-control" name="password" id="password" value="" required>
               </div>
               <div class="col-12">
-                <label for="password" class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" value=""
-                  required>
-              </div>
-              <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" name="iAgree" id="iAgree" required>
-                  <label class="form-check-label text-secondary" for="iAgree">
-                    I agree to the <a href="#!" class="link-primary text-decoration-none">terms and conditions</a>
-                  </label>
-                </div>
-              </div>
-              <div class="col-12">
                 <div class="d-grid">
-                  <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
+                  <button class="btn btn-lg btn-primary" type="submit">Create</button>
                 </div>
               </div>
             </div>
           </form>
-          <div class="row">
-            <div class="col-12">
-              <hr class="mt-5 mb-4 border-secondary-subtle">
-              <div class="col-12">
-                <p class="m-0 text-secondary text-center">Already have an account? <a href="/sign-in"
-                    class="link-primary text-decoration-none">Sign in</a></p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
