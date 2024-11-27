@@ -11,7 +11,9 @@ const routes = require('./routes/routes.js');
 const port = process.env.PORT ? process.env.PORT : "3000";
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const isSignedIn = require("./middleware/is-signed-in");
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("connected", () => {
@@ -19,7 +21,8 @@ mongoose.connection.on("connected", () => {
 });
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
-
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use('/assets', express.static(__dirname + '/assets'));
 // Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
 // Middleware for using HTTP verbs such as PUT or DELETE

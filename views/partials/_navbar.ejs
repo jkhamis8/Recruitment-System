@@ -13,7 +13,7 @@
         </li>
         <% if(user) { %>
           <% if(user.role=="Admin" ) { %>
-            <a class="nav-item nav-link" href="/addClient">Client Management</a>
+            <a class="nav-item nav-link" href="/createClientUser">Client Management</a>
             <a class="nav-item nav-link" href="">Vacancies Management</a>
             <a class="nav-item nav-link" href="#">Candidate Management</a>
             <% } else if(user.role=="Client" ) { %>

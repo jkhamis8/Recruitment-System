@@ -35,16 +35,17 @@ route.get('/admin', adminController.index)
 route.get('/candidate', candidateController.index)
 route.get('/client', clientController.index)
 
+/////////////////Vacancy
+
 route.get('/addVacancy', async (req, res) => {
   res.render('./layout.ejs', { page: './client/createVacancy.ejs' })
 });
 route.post('/addVacancy', clientController.createVacancy)
 
-route.get('/ManageVacancy', async (req, res) => {
-  res.render('./layout.ejs', { page: './client/ManageVacancy.ejs' })
-});
+route.get('/ManageVacancy', vacancyController.ManageVacancy)
 
-route.post('/addVacancy', clientController.createVacancy)
+
+route.post('/viewVacancy', vacancyController.viewVacancy)
 
 
 // route.post('/admin', carController.create)

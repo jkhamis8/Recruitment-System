@@ -2,21 +2,27 @@
   <h2>Vacancies Management</h2>
   <hr />
   <div class="card" style="width: 80%;">
-    <div class="row no-gutters">
-      <div class="col-7">
-        <div class="card-body">
-          <h5 class="card-title">Vacancy Title</h5>
-          <p class="card-text">Vacancy Description</p>
+    <% vacancies.forEach(async (Vacancy)=> { %>
+      <div class="row no-gutters">
+        <div class="col-7">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= Vacancy.title %>
+            </h5>
+            <p class="card-text">
+              <%=Vacancy.description%>
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="col-5">
-        <div class="card-body ">
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="#" class="btn btn-primary">Edit Vacancy</a>
-            <a href="#" class="btn btn-danger">Delete Vacancy</a>
+        <div class="col-5">
+          <div class="card-body ">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <a href="#" class="btn btn-primary">Edit Vacancy</a>
+              <a href="#" class="btn btn-danger">Delete Vacancy</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <% })%>
   </div>
 </div>
