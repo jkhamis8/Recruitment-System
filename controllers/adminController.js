@@ -1,11 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/userModel.js');
 const bcrypt = require('bcrypt')
-
-const index = (req, res) => {
-  res.render('index.ejs')
-}
+const User = require('../models/userModel.js');
+const Client = require('../models/clientModel.js');
 
 const createClientUser = async (req, res) => {
   try {
@@ -17,7 +12,7 @@ const createClientUser = async (req, res) => {
     req.body.password = hashPassword
     req.body.role = 'Client'
     const createdUser = await User.create(req.body)
-    res.render('./layout.ejs', { page: './admin/createClientUser.ejs', Message: 'Client Created successfully' })
+    res.render('./layout.ejs', { page: './admin/createClientUser.ejs', Message: 'Client User Created successfully' })
   }
   catch (error) {
     console.log(error);
@@ -25,15 +20,31 @@ const createClientUser = async (req, res) => {
   }
 }
 
-const updateUser = () => {
-
+const createClientView = async (req, res) => {
+  const allUsers = await User.find({})
+  res.render('./layout.ejs', { page: './admin/createClient.ejs', users:allUsers })
 }
 
-const deleteUser = () => {
-
+const createClient = async (req, res) => {
+  try {
+    const clientInDatabase = await Client.findOne({ name: req.body.name })
+    if (clientInDatabase) {
+      return res.send('Namw is already taken')
+    }
+  
+    const createdclient = await Client.create(req.body)
+    const allUsers = await User.find({})
+    res.render('./layout.ejs', { page: './admin/createClient.ejs', Message: 'Client Created successfully', users:allUsers })
+  }
+  catch (error) {
+    console.log(error);
+    res.render('./layout.ejs', { page: './admin/createClient.ejs', Message: 'Please Contact Admin' })
+  }
 }
+
 
 module.exports = {
-  index,
-  createClientUser
+  createClientUser,
+  createClientView,
+  createClient
 }

@@ -1,0 +1,40 @@
+<div class="bg-light py-3 py-md-3">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-11 col-lg-8 col-xl-7 col-xxl-6">
+        <div class="bg-white p-4 p-md-5 rounded shadow-sm">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-5">
+                <h2 class="h3">Edit Vacancy</h2>
+                <h3 class="fs-6 fw-normal text-secondary m-0">Edit The Vacancy Details</h3>
+              </div>
+            </div>
+          </div>
+          <form action="/editVacancy/<%= Vacancy._id %>" method="post">
+            <div class="row gy-3 gy-md-4 overflow-hidden">
+              <div class="col-12">
+                <label for="title" class="form-label">Title<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="title" id="title" value="<%= Vacancy.title %>" autofocus required>
+              </div>
+              <div class="col-12">
+                <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+                <textarea type="text" class="form-control" name="description" id="description"
+                  rows="3" required><%=Vacancy.description %></textarea>
+              </div>
+              <div class="col-12">
+                <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="location" id="location" value="<%=Vacancy.location %>" required>
+              </div>
+              <div class="col-12">
+                <div class="d-grid">
+                  <button class="btn btn-lg btn-primary" type="submit">submit</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

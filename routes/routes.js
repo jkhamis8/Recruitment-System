@@ -24,32 +24,34 @@ route.get("/sign-out", async (req, res) => {
 });
 /////////////////End Auth
 
-//
+//////////// admin
+route.get('/createClient', adminController.createClientView)
+route.post('/createClient', adminController.createClient)
 route.get('/createClientUser', async (req, res) => {
   res.render('./layout.ejs', { page: './admin/createClientUser.ejs' })
 });
 route.post('/createClientUser', adminController.createClientUser)
+/////////////////////////
 
+/////////////candidate
+route.get('/myVacancies', candidateController.viewMyVacancies)
+route.get('/profile', candidateController.viewProfile)
+route.post('/profile', candidateController.editProfile)
+/////////////////
 
-route.get('/admin', adminController.index)
-route.get('/candidate', candidateController.index)
-route.get('/client', clientController.index)
 
 /////////////////Vacancy
 
 route.get('/addVacancy', async (req, res) => {
   res.render('./layout.ejs', { page: './client/createVacancy.ejs' })
 });
-route.post('/addVacancy', clientController.createVacancy)
+route.post('/addVacancy', vacancyController.createVacancy)
 
 route.get('/ManageVacancy', vacancyController.ManageVacancy)
-
-
+route.get('/editVacancy/:vacancyID', vacancyController.viewEditVacancy)
+route.post('/editVacancy/:vacancyID', vacancyController.editVacancy)
 route.post('/viewVacancy', vacancyController.viewVacancy)
+route.post('/deleteVacancy', vacancyController.deleteVacancy)
 
-
-// route.post('/admin', carController.create)
-// route.put("/cars/:id", carController.updateCar);
-// route.delete("/cars/:id", carController.deleteCar);
 
 module.exports = route

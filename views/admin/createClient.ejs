@@ -11,25 +11,21 @@
               </div>
             </div>
           </div>
-          <form action="/createClientUser" method="post">
+          <form action="/createClient" method="post">
             <div class="row gy-3 gy-md-4 overflow-hidden">
-              <div class="col-12">
-                <label for="firstName" class="form-label">Username<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="username" autofocus
-                  required>
-              </div>
               <div class="col-12">
                 <label for="firstName" class="form-label">Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
               </div>
               <div class="col-12">
-                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com"
-                  required>
-              </div>
-              <div class="col-12">
-                <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                <input type="password" class="form-control" name="password" id="password" value="" required>
+                <label for="user" class="form-label">users<span class="text-danger">*</span></label>
+                <select class="form-select" name="user" id="user" multiple required>    
+                  <% users.forEach(async (user)=> { %>
+                  <option value="<%= user._id %>">
+                  <%= user.name %>
+                  </option>
+                  <% }) %>
+                </select>
               </div>
               <div class="col-12">
                 <div class="d-grid">
