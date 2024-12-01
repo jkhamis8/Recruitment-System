@@ -2,8 +2,6 @@ const vacancies = document.querySelectorAll('.Vacancy');
 
 vacancies.forEach(el => el.addEventListener('click', event => {
   vID = event.target.getAttribute("data-id")
-
-  console.log(vID)
   $.ajax({
     url: "/viewVacancy",
     method: 'post',
@@ -11,7 +9,6 @@ vacancies.forEach(el => el.addEventListener('click', event => {
       vacancyID: vID
     },
     success: function (data) {
-      const applied=data.appliedToVacancy
       const candidateCount=data.candidateCount
       data = data.vacancy
       
@@ -20,32 +17,25 @@ vacancies.forEach(el => el.addEventListener('click', event => {
       document.getElementById('modalVacancyLocation').innerHTML = data.location
       document.getElementById('modalVacancyClient').innerHTML = data.client
       document.getElementById('applicantCount').innerHTML = `${candidateCount} Applicant Applied`
-
-      if(applied){
-        document.getElementById('apply').innerHTML ="Applied"
-        document.getElementById('apply').setAttribute("disabled", true)
-      }else{
-        document.getElementById('apply').innerHTML ="Apply"
-        document.getElementById('apply').removeAttribute("disabled");
-        document.getElementById('apply').setAttribute("data-id", vID)
-      }
+      document.getElementById('withdraw_btn').setAttribute("data-id", vID)
       
     }
   });
 
 }))
 
-const applyToVacancy = document.getElementById('apply');
-applyToVacancy.addEventListener('click', event => {
+const withdrawApplication = document.getElementById('withdraw_btn');
+withdrawApplication.addEventListener('click', event => {
   vID = event.target.getAttribute("data-id")
   $.ajax({
-    url: "/applyToVacancy",
+    url: "/withdrawApplication",
     method: 'post',
     data: {
       vacancyID: vID
     },
     success: function (data) {
       $('#jobModal').modal('hide');
+      location.reload()
     }
   });
 

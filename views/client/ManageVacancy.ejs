@@ -17,12 +17,32 @@
         <div class="col-5">
           <div class="card-body ">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-primary viewCandidates" data-bs-toggle="modal"
+                data-bs-target="#candidatesModal" data-id="<%= Vacancy._id %>">View Candidates</button>
               <a href="/editVacancy/<%=Vacancy._id %>" class="btn btn-primary">Edit Vacancy</a>
-              <button type="button"  data-id="<%=Vacancy._id %>" class="btn btn-danger VDelete">Delete Vacancy</a>
+              <button type="button" data-id="<%=Vacancy._id %>" class="btn btn-danger VDelete">Delete Vacancy</a>
             </div>
           </div>
         </div>
       </div>
       <% })%>
-  </div> 
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="candidatesModal" tabindex="-1" aria-labelledby="jobModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modal_title"></h1>
+        <span id="applicantCount" class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0 ms-2"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5>Candidates:</h5>
+        <ul id="candidate_list" class="list-group">
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

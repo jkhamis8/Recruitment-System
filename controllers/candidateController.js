@@ -1,19 +1,18 @@
-const express = require('express');
-const router = express.Router();
 const User = require('../models/userModel.js');
 const Vacancies = require('../models/vacanciesModel.js');
 const bcrypt = require('bcrypt')
 
-const viewMyVacancies = async (req, res) => {
+const viewMyJobs = async (req, res) => {
   let candidateVacancies = []
   const appliedVacancies = await Vacancies.find({ "candidate": req.session.user });
-  let appliedVacanciesObj = appliedVacancies[0]
-  if (appliedVacanciesObj) {
-    candidateVacancies = await Promise.all(appliedVacanciesObj.vacancies.map(async (vacancy) => {
-      return await Vacancies.findById(vacancy);
+  if (appliedVacancies) {
+    candidateVacancies = await Promise.all(appliedVacancies.map(async (vacancy) => {
+      if(vacancy.candidate.includes(req.session.user._id)){
+        return vacancy
+      }
     }))
   }
-  res.render('./layout.ejs', { page: './candidate/index.ejs', jsPath: './assets/js/indexManage.js', vacancies: candidateVacancies })
+  res.render('./layout.ejs', { page: './candidate/index.ejs', jsPath: './assets/js/myJobs.js', vacancies: candidateVacancies })
 };
 
 const viewProfile = async (req, res) => {
@@ -47,23 +46,21 @@ const applyToVacancy = async (req, res) => {
   }
 }
 
-
-
-const withdrawCandidate = async (req, res) => {
+const withdrawApplication = async (req, res) => {
   try {
-    await Vacancies.findByIdAndUpdate(req.body.vacancyID, { $pull: { candidate: req.session.user } })
+    await Vacancies.findByIdAndUpdate(req.body.vacancyID, { $pull: { candidate: req.session.user._id } })
     req.method = 'GET'
-    res.redirect("/myVacancies");
+    res.redirect("/myJobs");
   } catch (error) {
     console.log(error);
-    res.redirect("/myVacancies");
+    res.redirect("/myJobs");
   }
 }
 
 module.exports = {
   editProfile,
   viewProfile,
-  viewMyVacancies,
+  viewMyJobs,
   applyToVacancy,
-  withdrawCandidate
+  withdrawApplication
 }

@@ -34,12 +34,13 @@ route.post('/createClientUser', adminController.createClientUser)
 /////////////////////////
 
 /////////////candidate
-route.get('/myVacancies', candidateController.viewMyVacancies)
+route.get('/myJobs', candidateController.viewMyJobs)
+route.post('/withdrawApplication', candidateController.withdrawApplication)
 route.get('/profile', candidateController.viewProfile)
 route.post('/profile', candidateController.editProfile)
 route.post('/applyToVacancy', candidateController.applyToVacancy)
-/////////////////
 
+/////////////////
 
 /////////////////Vacancy
 
@@ -53,6 +54,6 @@ route.get('/editVacancy/:vacancyID', vacancyController.viewEditVacancy)
 route.post('/editVacancy/:vacancyID', vacancyController.editVacancy)
 route.post('/viewVacancy', vacancyController.viewVacancy)
 route.post('/deleteVacancy', vacancyController.deleteVacancy)
-
+route.post('/viewCandidates', vacancyController.viewCandidates)
 
 module.exports = route

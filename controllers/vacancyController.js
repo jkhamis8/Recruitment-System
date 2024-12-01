@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 const User = require('../models/userModel.js');
 const Client = require('../models/clientModel.js');
 const Vacancies = require('../models/vacanciesModel.js');
@@ -24,15 +21,17 @@ const createVacancy = async (req, res) => {
 
 const viewVacancy = async (req, res) => {
   const vacancy = await Vacancies.findById(req.body.vacancyID)
-  res.json({ vacancy });
+  const appliedToVacancy=vacancy.candidate.includes(req.session.user._id)
+  const candidateCount=vacancy.candidate.length
+  res.json({ vacancy,appliedToVacancy,candidateCount });
 }
 
 const ManageVacancy = async (req, res) => {
   let clientVacancies = []
   const userClient = await Client.find({ "user": req.session.user });
-  let userclientObj = userClient[0]
-  if (userclientObj) {
-    clientVacancies = await Promise.all(userclientobj.vacancies.map(async (vacancy) => {
+  let userClientObj = userClient[0]
+  if (userClientObj) {
+    clientVacancies = await Promise.all(userClientObj.vacancies.map(async (vacancy) => {
       return await Vacancies.findById(vacancy);
     }))
   }
@@ -71,6 +70,20 @@ const deleteVacancy = async (req, res) => {
   }
 }
 
+const viewCandidates = async (req, res) => {
+  const vID = req.body.vacancyID
+  const vacancyObj = await Vacancies.findById(vID)
+  const candidateCount=vacancyObj.candidate.length
+  let candidatesVacancies = []
+  if (vacancyObj) {
+    candidatesVacancies = await Promise.all(vacancyObj.candidate.map(async (candidateID) => {
+        return await User.findById(candidateID)
+    }))
+  }
+  res.json({ vacancyObj,candidatesVacancies,candidateCount });
+};
+
+
 module.exports = {
   index,
   createVacancy,
@@ -78,5 +91,6 @@ module.exports = {
   deleteVacancy,
   ManageVacancy,
   viewEditVacancy,
-  editVacancy
+  editVacancy,
+  viewCandidates
 }

@@ -20,7 +20,6 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/createClientUser">add Client User</a></li>
-                <li><a class="dropdown-item" href="/manageClientUser">Manage Client User</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -30,28 +29,9 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/createClient">add Client</a></li>
-                <li><a class="dropdown-item" href="/manageClient">Manage Client</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Vacancies Management
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/createVacancies">add Vacancies</a></li>
-                <li><a class="dropdown-item" href="/manageVacancies">Manage Vacancies</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Candidate Management
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/manageCandidate">Manage Candidate</a></li>
-              </ul>
-            </li>
+
             <% } else if(user.role=="Client" ) { %>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -64,7 +44,7 @@
                 </ul>
               </li>
               <% } else if(user.role=="Candidate" ) { %>
-                <a class="nav-item nav-link" href="/myVacancies">My Vacancies</a>
+                <a class="nav-item nav-link" href="/myJobs">My Jobs</a>
                 <a class="nav-item nav-link" href="/profile">Profile</a>
                 <% } %>
                   <% } %>
