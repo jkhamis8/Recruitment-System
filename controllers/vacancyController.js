@@ -21,9 +21,12 @@ const createVacancy = async (req, res) => {
 
 const viewVacancy = async (req, res) => {
   const vacancy = await Vacancies.findById(req.body.vacancyID)
-  const appliedToVacancy=vacancy.candidate.includes(req.session.user._id)
-  const candidateCount=vacancy.candidate.length
-  res.json({ vacancy,appliedToVacancy,candidateCount });
+  let appliedToVacancy = false
+  if (typeof req.session.user != 'undefined') {
+    appliedToVacancy = vacancy.candidate.includes(req.session.user._id)
+  }
+  const candidateCount = vacancy.candidate.length
+  res.json({ vacancy, appliedToVacancy, candidateCount });
 }
 
 const ManageVacancy = async (req, res) => {
@@ -73,14 +76,14 @@ const deleteVacancy = async (req, res) => {
 const viewCandidates = async (req, res) => {
   const vID = req.body.vacancyID
   const vacancyObj = await Vacancies.findById(vID)
-  const candidateCount=vacancyObj.candidate.length
+  const candidateCount = vacancyObj.candidate.length
   let candidatesVacancies = []
   if (vacancyObj) {
     candidatesVacancies = await Promise.all(vacancyObj.candidate.map(async (candidateID) => {
-        return await User.findById(candidateID)
+      return await User.findById(candidateID)
     }))
   }
-  res.json({ vacancyObj,candidatesVacancies,candidateCount });
+  res.json({ vacancyObj, candidatesVacancies, candidateCount });
 };
 
 

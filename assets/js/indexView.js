@@ -11,25 +11,24 @@ vacancies.forEach(el => el.addEventListener('click', event => {
       vacancyID: vID
     },
     success: function (data) {
-      const applied=data.appliedToVacancy
-      const candidateCount=data.candidateCount
+      const applied = data.appliedToVacancy
+      const candidateCount = data.candidateCount
       data = data.vacancy
-      
+
       document.getElementById('modal_title').innerHTML = data.title
       document.getElementById('modalVacancyDescription').innerHTML = data.description
       document.getElementById('modalVacancyLocation').innerHTML = data.location
-      document.getElementById('modalVacancyClient').innerHTML = data.client
       document.getElementById('applicantCount').innerHTML = `${candidateCount} Applicant Applied`
 
-      if(applied){
-        document.getElementById('apply').innerHTML ="Applied"
+      if (applied) {
+        document.getElementById('apply').innerHTML = "Applied"
         document.getElementById('apply').setAttribute("disabled", true)
-      }else{
-        document.getElementById('apply').innerHTML ="Apply"
+      } else {
+        document.getElementById('apply').innerHTML = "Apply"
         document.getElementById('apply').removeAttribute("disabled");
         document.getElementById('apply').setAttribute("data-id", vID)
       }
-      
+
     }
   });
 
