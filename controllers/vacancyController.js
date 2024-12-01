@@ -13,7 +13,7 @@ const index = async (req, res) => {
 const createVacancy = async (req, res) => {
   try {
     const createdVacancies = await Vacancies.create(req.body)
-    await Client.findOneAndUpdate({"user": req.session.user},{ $push: { vacancies: createdVacancies._id } },)
+    await Client.findOneAndUpdate({ "user": req.session.user }, { $push: { vacancies: createdVacancies._id } },)
     res.render('./layout.ejs', { page: './client/createVacancy.ejs', Message: 'Client Created successfully' })
   }
   catch (error) {
@@ -28,11 +28,11 @@ const viewVacancy = async (req, res) => {
 }
 
 const ManageVacancy = async (req, res) => {
-  let clientVacancies=[]
-  const userClient = await Client.find({"user": req.session.user});
-  let userclientobj=userClient[0]
-  if(userclientobj){
-    clientVacancies = await Promise.all(userclientobj.vacancies.map(async(vacancy) => {
+  let clientVacancies = []
+  const userClient = await Client.find({ "user": req.session.user });
+  let userclientObj = userClient[0]
+  if (userclientObj) {
+    clientVacancies = await Promise.all(userclientobj.vacancies.map(async (vacancy) => {
       return await Vacancies.findById(vacancy);
     }))
   }
@@ -60,24 +60,15 @@ const editVacancy = async (req, res) => {
 
 const deleteVacancy = async (req, res) => {
   try {
-    const vID=req.body.vacancyID
-    await Client.findOneAndUpdate({"vacancies": vID},{ $pull: { vacancies: vID } })
+    const vID = req.body.vacancyID
+    await Client.findOneAndUpdate({ "vacancies": vID }, { $pull: { vacancies: vID } })
     await Vacancies.findByIdAndDelete(vID);
     req.method = 'GET'
     res.redirect("/ManageVacancy");
-  }catch (error) {
+  } catch (error) {
     console.log(error);
     res.redirect("/ManageVacancy");
   }
-}
-
-const applyToVacancy =  async (req, res) => {
-
-}
-
-
-const withdrawCandidate = () => {
-
 }
 
 module.exports = {
@@ -86,7 +77,6 @@ module.exports = {
   viewVacancy,
   deleteVacancy,
   ManageVacancy,
-  applyToVacancy,
   viewEditVacancy,
   editVacancy
 }

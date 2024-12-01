@@ -37,6 +37,7 @@ route.post('/createClientUser', adminController.createClientUser)
 route.get('/myVacancies', candidateController.viewMyVacancies)
 route.get('/profile', candidateController.viewProfile)
 route.post('/profile', candidateController.editProfile)
+route.post('/applyToVacancy', candidateController.applyToVacancy)
 /////////////////
 
 
